@@ -1,7 +1,6 @@
 
 /*
 1.模板在路由切换时会为每一个 children 创建一个实例。这就意味着当用户在共享一个模板的路由间跳转的时候，将会重新挂载组件实例，重新创建 DOM 元素，不保留状态(而layout会保留)
-2.如果同一目录下既有 template.js 也有 layout.js， layout 会包裹 template，template 又会包裹 page
 */
 /*
 某些情况下，模板会比布局更适合：
