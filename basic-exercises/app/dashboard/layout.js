@@ -17,6 +17,9 @@ export default function DashboardLayout({ children }) {
         Increment
       </button>
       {children}
+      <div>
+        <Link href="/">go back Home</Link>
+      </div>
     </>
   )
 }

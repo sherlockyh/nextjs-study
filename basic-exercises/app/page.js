@@ -32,19 +32,44 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  const router = useRouter()
-  return (
-    <>
-      <h1>Hello, Next.js!</h1>
-      {/* 方式1：使用Link组件 */}
-      <Link href="/dashboard">Dashboard</Link>
-      <br />
-      {/* 方式2：使用useRouter */}
-      <button type="button" onClick={() => router.push('/dashboard')}>
-        Dashboard
-      </button>
-    </>
-  )
+   const router = useRouter()
+   return (
+      <div className="h-full  flex flex-col items-center justify-center p-4">
+         <h1 className="text-4xl font-bold text-gray-800 mb-8">Hello, Next.js!</h1>
+         <div className="space-y-4 w-full max-w-md">
+            {/* 跳转方式1：使用Link组件 */}
+            <Link
+               href="/dashboard"
+               className="block w-full text-center py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            >
+               go to Dashboard（基础）
+            </Link>
+
+            {/* 跳转方式2：使用useRouter */}
+            <button
+               type="button"
+               onClick={() => router.push('/routerTypes/parallelRoutes/mainPage')}
+               className="w-full py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+            >
+               go to MainPage(平行路由)
+            </button>
+
+            <Link
+               href="/routerTypes/dynamicRouters/type1/a"
+               className="block w-full text-center py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+            >
+               go to type1(动态路由)
+            </Link>
+
+            <Link
+               href="/routerTypes/interceptingRoutes"
+               className="block w-full text-center py-2 px-4 bg-sky-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+            >
+               go to interceptingRoutes(拦截路由)
+            </Link>
+         </div>
+      </div>
+   )
 }
 /*
 Link示例代码

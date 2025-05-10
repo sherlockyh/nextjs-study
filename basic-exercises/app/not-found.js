@@ -13,8 +13,6 @@ app/not-found.js ，它只能由两种情况触发：
   }
   
   执行 notFound 函数时，会由最近的 not-found.js 来处理。但如果直接访问不存在的路由，则都是由 app/not-found.js 来处理
-
-  当 app/not-found.js 和路由组一起使用的时候，可能会出现问题，可以参考该文章https://juejin.cn/post/7351321244125265930
 */
 
 import Link from 'next/link'
