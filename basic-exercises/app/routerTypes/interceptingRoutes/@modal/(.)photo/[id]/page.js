@@ -1,8 +1,8 @@
 import { photos } from "../../../data";
 import Image from "next/image";
 
-export default async function PhotoModal({ params }) {
-  const { id } = await params
+export default function PhotoModal({ params }) {
+  const { id } = params
   const photo = photos.find((p) => p.id === id);
   console.log(photo, 'photo');
 
