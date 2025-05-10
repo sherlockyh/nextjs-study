@@ -33,40 +33,70 @@ import { useRouter } from 'next/navigation'
 
 export default function Home() {
    const router = useRouter()
+
+   const routes = [
+      {
+         href: '/dashboard',
+         text: 'go to Dashboard（基础）',
+         type: 'link',
+         className: 'bg-blue-500 hover:bg-blue-600'
+      },
+      {
+         href: '/routerTypes/parallelRoutes/mainPage',
+         text: 'go to MainPage(平行路由)',
+         type: 'button',
+         className: 'bg-green-500 hover:bg-green-600'
+      },
+      {
+         href: '/routerTypes/dynamicRouters/type1/a',
+         text: 'go to type1(动态路由)',
+         type: 'link',
+         className: 'bg-purple-500 hover:bg-purple-600'
+      },
+      {
+         href: '/routerTypes/interceptingRoutes',
+         text: 'go to interceptingRoutes(拦截路由)',
+         type: 'link',
+         className: 'bg-sky-500 hover:bg-sky-600'
+      },
+      {
+         href: '/routingHandler',
+         text: 'go to routingHandler(路由处理程序)',
+         type: 'link',
+         className: 'bg-red-500 hover:bg-red-600'
+      }
+   ]
+
+   const baseButtonStyles = "w-full text-center py-2 px-4 text-white rounded-lg transition-colors"
+
+   const handleClick = (href) => {
+      router.push(href)
+   }
+
    return (
-      <div className="h-full  flex flex-col items-center justify-center p-4">
+      <div className="h-full flex flex-col items-center justify-center p-4">
          <h1 className="text-4xl font-bold text-gray-800 mb-8">Hello, Next.js!</h1>
          <div className="space-y-4 w-full max-w-md">
-            {/* 跳转方式1：使用Link组件 */}
-            <Link
-               href="/dashboard"
-               className="block w-full text-center py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-               go to Dashboard（基础）
-            </Link>
-
-            {/* 跳转方式2：使用useRouter */}
-            <button
-               type="button"
-               onClick={() => router.push('/routerTypes/parallelRoutes/mainPage')}
-               className="w-full py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-            >
-               go to MainPage(平行路由)
-            </button>
-
-            <Link
-               href="/routerTypes/dynamicRouters/type1/a"
-               className="block w-full text-center py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-            >
-               go to type1(动态路由)
-            </Link>
-
-            <Link
-               href="/routerTypes/interceptingRoutes"
-               className="block w-full text-center py-2 px-4 bg-sky-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-            >
-               go to interceptingRoutes(拦截路由)
-            </Link>
+            {routes.map((route, index) => (
+               route.type === 'link' ? (
+                  <Link
+                     key={index}
+                     href={route.href}
+                     className={`block ${baseButtonStyles} ${route.className}`}
+                  >
+                     {route.text}
+                  </Link>
+               ) : (
+                  <button
+                     key={index}
+                     type="button"
+                     onClick={() => handleClick(route.href)}
+                     className={`${baseButtonStyles} ${route.className}`}
+                  >
+                     {route.text}
+                  </button>
+               )
+            ))}
          </div>
       </div>
    )
