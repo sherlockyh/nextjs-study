@@ -3,10 +3,16 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": [
-        "components/*"
+        "components/*",
       ],
       "@/lib/*": [
         "lib/*"
+      ],
+      "@/actions": [
+        "app/[lng]/actions.js"
+      ],
+      "@/*": [
+        "/*"
       ]
     }
   }
