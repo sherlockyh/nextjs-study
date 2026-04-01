@@ -1,7 +1,10 @@
 import SidebarNoteListFilter from "@/components/SidebarNoteListFilter";
-import { getAllNotes } from "@/lib/redis";
+import { unstable_noStore as noStore } from "next/cache";
+import { getAllNotes } from "@/lib/strapi";
 
 export default async function NoteList() {
+  noStore();
+  console.log("[SidebarNoteList] getAllNotes called");
   const notes = await getAllNotes();
   const noteItems = Object.entries(notes).map(([noteId, note]) => ({
     noteId,

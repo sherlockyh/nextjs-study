@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import NotePreview from "@/components/NotePreview";
 import { deleteNote, saveNote } from "@/actions";
 import SaveButton from "@/components/SaveButton";
@@ -11,8 +12,9 @@ const initialState = {
 };
 
 export default function NoteEditor({ noteId, initialTitle, initialBody }) {
+  const router = useRouter();
   const [saveState, saveFormAction] = useActionState(saveNote, initialState);
-  const [delState, delFormAction] = useActionState(deleteNote, initialState);
+  const [, delFormAction] = useActionState(deleteNote, initialState);
 
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
@@ -21,10 +23,15 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }) {
 
   useEffect(() => {
     if (saveState.errors) {
-      // 处理错误
       console.log(saveState.errors);
     }
   }, [saveState]);
+
+  useEffect(() => {
+    if (saveState?.message) {
+      router.refresh();
+    }
+  }, [saveState?.message, router]);
 
   return (
     <div className="note-editor">

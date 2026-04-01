@@ -17,7 +17,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { addNote, updateNote, delNote } from "@/lib/redis";
+import { addNote, updateNote, delNote } from "@/lib/strapi";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -51,10 +51,10 @@ export async function saveNote(prevState, formData) {
   // 更新数据库
   if (noteId) {
     await updateNote(noteId, JSON.stringify(data));
-    revalidatePath("/", "layout");
+    revalidatePath("/[lng]", "layout");
   } else {
     await addNote(JSON.stringify(data));
-    revalidatePath("/", "layout");
+    revalidatePath("/[lng]", "layout");
   }
 
   return { message: `Add Success!` };
@@ -62,7 +62,7 @@ export async function saveNote(prevState, formData) {
 
 export async function deleteNote(prevState, formData) {
   const noteId = formData.get("noteId");
-  delNote(noteId);
-  revalidatePath("/", "layout");
+  await delNote(noteId);
+  revalidatePath("/[lng]", "layout");
   redirect("/");
 }
